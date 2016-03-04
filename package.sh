@@ -18,10 +18,7 @@ base_dir="./"
 if [ -f ${base_dir}src/8723bu.ko ] ; then
 
 	cp -v ${base_dir}src/8723bu.ko ${base_dir}
-	cp -v ${base_dir}src/RT2870STA.dat ${base_dir}
-	cp -v ${base_dir}src/README_STA_usb ${base_dir}
-
-	#echo "mt7601Usta" > ${base_dir}mt7601.conf
+	cp -v ${base_dir}src/README.md ${base_dir}
 
 	echo "Section: misc" > ${base_dir}control
 	echo "Priority: optional" >> ${base_dir}control
@@ -33,7 +30,7 @@ if [ -f ${base_dir}src/8723bu.ko ] ; then
 	echo "Pre-Depends: linux-image-${uname_r}" >> ${base_dir}control
 	echo "Maintainer: Robert Nelson <robertcnelson@gmail.com>" >> ${base_dir}control
 	echo "Architecture: ${dpkg_arch}" >> ${base_dir}control
-	echo "Readme: README_STA_usb" >> ${base_dir}control
+	echo "Readme: README.md" >> ${base_dir}control
 	echo "Files: 8723bu.ko /lib/modules/${uname_r}/kernel/drivers/net/wireless/" >> ${base_dir}control
 	#echo " RT2870STA.dat /etc/Wireless/RT2870STA/" >> ${base_dir}control
 	#echo " mt7601.conf /etc/modules-load.d/" >> ${base_dir}control
@@ -43,9 +40,7 @@ if [ -f ${base_dir}src/8723bu.ko ] ; then
 
 	equivs-build control
 
-	rm -rf mt7601Usta.ko || true
-	rm -rf RT2870STA.dat || true
-	rm -rf README_STA_usb || true
-	#rm -rf mt7601.conf || true
+	rm -rf 8723bu.ko || true
+	rm -rf README.md || true
 	rm -rf control || true
 fi
