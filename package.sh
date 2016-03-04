@@ -7,17 +7,17 @@ if [ "x${ARCH}" = "xarmv7l" ] ; then
 	distro="DISTRO"
 	dpkg_arch="armhf"
 else
-	uname_r="3.14.19-ti-r24"
-	distro="wheezy"
+	uname_r="4.1.18-ti-r50.5"
+	distro="jessie"
 	dpkg_arch="amd64"
 fi
 
-package="mt7601u"
+package="rtl8723bu"
 base_dir="./"
 
-if [ -f ${base_dir}src/os/linux/mt7601Usta.ko ] ; then
+if [ -f ${base_dir}src/8723bu.ko ] ; then
 
-	cp -v ${base_dir}src/os/linux/mt7601Usta.ko ${base_dir}
+	cp -v ${base_dir}src/8723bu.ko ${base_dir}
 	cp -v ${base_dir}src/RT2870STA.dat ${base_dir}
 	cp -v ${base_dir}src/README_STA_usb ${base_dir}
 
@@ -34,7 +34,7 @@ if [ -f ${base_dir}src/os/linux/mt7601Usta.ko ] ; then
 	echo "Maintainer: Robert Nelson <robertcnelson@gmail.com>" >> ${base_dir}control
 	echo "Architecture: ${dpkg_arch}" >> ${base_dir}control
 	echo "Readme: README_STA_usb" >> ${base_dir}control
-	echo "Files: mt7601Usta.ko /lib/modules/${uname_r}/kernel/drivers/net/wireless/" >> ${base_dir}control
+	echo "Files: 8723bu.ko /lib/modules/${uname_r}/kernel/drivers/net/wireless/" >> ${base_dir}control
 	#echo " RT2870STA.dat /etc/Wireless/RT2870STA/" >> ${base_dir}control
 	#echo " mt7601.conf /etc/modules-load.d/" >> ${base_dir}control
 	echo "Description: ${package} modules" >> ${base_dir}control
