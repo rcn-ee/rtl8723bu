@@ -2,14 +2,20 @@
 
 ARCH=$(uname -m)
 
-x86_dir="/opt/github/bb.org/ti-4.1/normal"
-x86_compiler="gcc-linaro-4.9-2015.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-"
+if [ -f .builddir ] ; then
 
-if [ "x${ARCH}" = "xarmv7l" ] ; then
-	make_options="CROSS_COMPILE= KSRC=/build/buildd/linux-src"
-else
-	make_options="CROSS_COMPILE=${HOME}/dl/gcc/${x86_compiler} KSRC=${x86_dir}/KERNEL"
+	if [ "x${ARCH}" = "xarmv7l" ] ; then
+		make_options="CROSS_COMPILE= KSRC=/build/buildd/linux-src"
+	else
+		x86_dir="`pwd`/../../normal"
+		if [ -f `pwd`/../../normal/.CC ] ; then
+			. `pwd`/../../normal/.CC
+			make_options="CROSS_COMPILE=${CC} KSRC=${x86_dir}/KERNEL"
+		fi
+	fi
+
+	make ARCH=arm ${make_options} clean
+	echo "make ARCH=arm ${make_options}"
+	make ARCH=arm ${make_options} all
 fi
-
-make ARCH=arm ${make_options} all
 #
